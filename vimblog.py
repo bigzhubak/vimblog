@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 import tornado.ioloop
 import tornado.web
-import public
-
 
 OK = '0'
 html_path = '/home/bigzhu/Dropbox/knowledge/html/'
@@ -11,7 +9,7 @@ html_path = '/home/bigzhu/Dropbox/knowledge/html/'
 
 def getHtmlContent(name):
     name_file = open(html_path + name + '.html', 'r')
-    content = str(name_file.read())
+    content = name_file.read()
     name_file.close()
     return content
 
@@ -19,6 +17,7 @@ def getHtmlContent(name):
 class blog(tornado.web.RequestHandler):
     def get(self, name):
         content = getHtmlContent(name)
+        print content
         self.render("./template/detail.html", title='test', content=content)
 
 
@@ -29,7 +28,7 @@ class MyStaticFileHandler(tornado.web.StaticFileHandler):
         self.set_header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
 
 
-settings = {'debug': True, 'cookie_secret': 'bigzhu so big'}
+settings = {'debug': True, 'cookie_secret': 'bigzhu so big', 'autoescape':None}
 url_map = [
     (r'/blog/(.*)', blog),
 ]
