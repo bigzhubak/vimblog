@@ -4,12 +4,22 @@ import tornado.ioloop
 import tornado.web
 import public
 
+
 OK = '0'
+html_path = '/home/bigzhu/Dropbox/knowledge/html/'
+
+
+def getHtmlContent(name):
+    name_file = open(html_path + name + '.html', 'r')
+    content = str(name_file.read())
+    name_file.close()
+    return content
 
 
 class blog(tornado.web.RequestHandler):
-    def get(self):
-        self.write("Hello, world, haha")
+    def get(self, name):
+        content = getHtmlContent(name)
+        self.render("./template/detail.html", title='test', content=content)
 
 
 class MyStaticFileHandler(tornado.web.StaticFileHandler):
@@ -19,14 +29,10 @@ class MyStaticFileHandler(tornado.web.StaticFileHandler):
         self.set_header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
 
 
-the_globals = globals().copy()
-url_map = public.getURLMap(the_globals)
-
-settings = {'debug': True,
-            'cookie_secret': 'bigzhu so big',
-            'login_url': "/static/login.html"}
-url_map.append((r'/static/(.*)', MyStaticFileHandler, {'path': "./static"}))
-
+settings = {'debug': True, 'cookie_secret': 'bigzhu so big'}
+url_map = [
+    (r'/blog/(.*)', blog),
+]
 application = tornado.web.Application(url_map, **settings)
 
 if __name__ == "__main__":
