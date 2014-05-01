@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
 import tornado.ioloop
 import tornado.web
 from search_vimwiki import SearchWiki
@@ -46,12 +47,13 @@ class MyStaticFileHandler(tornado.web.StaticFileHandler):
         self.set_header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
 
 
-settings = {'debug': True, 'cookie_secret': 'bigzhu so big', 'autoescape': None}
+settings = {'debug': True, 'cookie_secret': 'bigzhu so big', 'autoescape': None,
+        "static_path": os.path.join(os.path.dirname(__file__), "static"),
+            }
 url_map = [
     (r'/', list),
     (r'/blog/(.*)', blog),
     (r'/list/(.*)', list),
-    (r'/static/(.*)', MyStaticFileHandler, {'path': "./static"})
 ]
 application = tornado.web.Application(url_map, **settings)
 
