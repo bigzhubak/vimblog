@@ -12,7 +12,6 @@ WIKI_PATH = '/home/bigzhu/Dropbox/knowledge/data/'
 def getList(name):
     seartch_wiki = SearchWiki(name)
     seartch_wiki.search(WIKI_PATH)
-    seartch_wiki.search()
     seartch_wiki.mergerByYear()
     seartch_wiki.sortByTime()
     seartch_wiki.sortByYear()
@@ -64,4 +63,4 @@ application = tornado.web.Application(url_map, **settings)
 if __name__ == "__main__":
     application.listen(8888)
     tornado.ioloop.IOLoop.instance().start()
-    #getList('下')
+    #print getList('search_vimwiki')
