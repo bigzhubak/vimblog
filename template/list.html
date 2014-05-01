@@ -34,6 +34,19 @@
     </div>
 </nav>
 <div class="container">
+    {%if len(lists) == 0%}
+    <div class="panel panel-default">
+        <div class="panel-heading">不好意思,没有找到任何与 <b>{{title}}</b> 类似的内容!<br>
+            你确定你没有喝多?<br>
+            或者你是一只从键盘爬过的喵?<br>
+            <br>
+            因为你要找的东西时尚到bigzhu都没玩过的可能性太小了. <br>
+            如果真的出现了这种餐具,请给bigzhu发邮件告诉他: <br>vermiliondun@gmail.com<br>
+
+            或者用disqus留言!
+        </div>
+    </div>
+    {%end%}
     {%for l in lists%}
     <div class="panel panel-default">
         <div class="panel-heading">{{l[0]}}年</div>

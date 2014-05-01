@@ -15,6 +15,7 @@ sys.setdefaultencoding('utf-8')
 
 
 
+HTML_PATH = '/home/bigzhu/Dropbox/knowledge/html/'
 WIKI_INDEX = 'wiki_index'
 
 
@@ -25,12 +26,21 @@ class SearchWiki:
         self.mergered_all_sorted = []
         self.wikis_time = {}
 
+    def getHtmlNameList(self):
+        html_list = []
+        for html in os.listdir(HTML_PATH):
+            html = os.path.basename(html)
+            html = html.rsplit('.', 1)
+            html = html[0]
+            html_list.append(html)
+        return html_list
+
+
     def search(self, path='.'):
         '''找到wiki文件名,并加上时间'''
         #wiki_names = glob.glob('*%s*.wiki' % self.wiki_name)
-
+        html_list = self.getHtmlNameList()
         pattern = re.compile(r'^\.')
-        print path
         for wiki in os.listdir(path):
             # 如果是路径，就不要加入
             if os.path.isdir(wiki):
@@ -44,7 +54,8 @@ class SearchWiki:
                     wiki = os.path.basename(wiki)
                     wiki = wiki.rsplit('.', 1)
                     wiki = wiki[0]
-                    self.wikis_time[wiki] = modify_time
+                    if wiki in html_list:
+                        self.wikis_time[wiki] = modify_time
 
     def mergerByYear(self):
         '''按年份来归并'''
