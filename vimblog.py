@@ -26,10 +26,8 @@ def getHtmlContent(name):
 
 
 class list(tornado.web.RequestHandler):
-    def get(self, name):
+    def get(self, name='*'):
         lists = getList(name)
-        for i in lists:
-            print i[1]
         self.render("./template/list.html", title=name, lists=lists)
 
 
@@ -50,7 +48,7 @@ class MyStaticFileHandler(tornado.web.StaticFileHandler):
 
 settings = {'debug': True, 'cookie_secret': 'bigzhu so big', 'autoescape': None}
 url_map = [
-    (r'/', blog),
+    (r'/', list),
     (r'/blog/(.*)', blog),
     (r'/list/(.*)', list),
     (r'/static/(.*)', MyStaticFileHandler, {'path': "./static"})

@@ -40,14 +40,15 @@
     </div>
 </nav>
 <div class="container">
-
     {%for l in lists%}
-    {{l[0]}}
-    <ul class="nav nav-pills nav-stacked">
+    <div class="list-group">
+        <a href="#" class="list-group-item active">
+            {{l[0]}}年
+        </a>
         {%for item in l[1]%}
-        <li><a href="#">{{item[0]}}</a></li>
+        <a href="/blog/{{item[0]}}" class="list-group-item">{{item[0]}}</a>
         {%end%}
-    </ul>
+    </div>
     {%end%}
     <!--评论-->
     <div id="disqus_thread"></div>
