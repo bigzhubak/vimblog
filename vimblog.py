@@ -7,11 +7,11 @@ from search_vimwiki import SearchWiki
 
 HTML_PATH = '/home/bigzhu/Dropbox/knowledge/html/'
 WIKI_PATH = '/home/bigzhu/Dropbox/knowledge/data/'
-
+key_names = ['vim', 'python', 'bigzhu']
 
 def getList(name):
     seartch_wiki = SearchWiki(name)
-    seartch_wiki.search(WIKI_PATH)
+    seartch_wiki.search(WIKI_PATH, HTML_PATH)
     seartch_wiki.mergerByYear()
     seartch_wiki.sortByTime()
     seartch_wiki.sortByYear()
@@ -32,7 +32,7 @@ class list(tornado.web.RequestHandler):
             title = 'bigzhu的窝'
         else:
             title = name
-        self.render("./template/list.html", title=title, lists=lists)
+        self.render("./template/list.html", title=title, lists=lists, key_names=key_names)
 
 
 class blog(tornado.web.RequestHandler):
@@ -40,7 +40,7 @@ class blog(tornado.web.RequestHandler):
         if name is None:
             name = 'index'
         content = getHtmlContent(name)
-        self.render("./template/detail.html", title=name, content=content)
+        self.render("./template/detail.html", title=name, content=content, key_names=key_names)
 
 
 class MyStaticFileHandler(tornado.web.StaticFileHandler):

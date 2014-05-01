@@ -25,6 +25,15 @@
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            {%for key_name in key_names%}
+            <li 
+            {%if key_name == title%}
+            class="active"
+            {%end%}
+            ><a href="/list/{{key_name}}">{{key_name}}</a></li>
+            {%end%}
+        </ul>
         <form class="navbar-form navbar-right" role="search">
             <div class="form-group">
                 <input id='key_name' type="text" onkeydown="if(event.keyCode==13) {search();return false;}" class="form-control" placeholder="Search">
