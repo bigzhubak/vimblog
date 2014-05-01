@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<title>{{title}}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<!--
+<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+-->
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">bigzhu的窝</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">查找</button>
+        </form>
+    </div>
+</nav>
+<div class="container">
+
+    {%for l in lists%}
+    {{l[0]}}
+    <ul class="nav nav-pills nav-stacked">
+        {%for item in l[1]%}
+        <li><a href="#">{{item[0]}}</a></li>
+        {%end%}
+    </ul>
+    {%end%}
+    <!--评论-->
+    <div id="disqus_thread"></div>
+
+    <noscript>要查看或参与评论，请启用 JavaScript 支持 <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    <p>&copy; 2009-2014 <a href="%root_path%bigzhu.html">bigzhu</a>&nbsp;&nbsp;</p>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!--
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+-->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!--
+<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+-->
+<script type="text/javascript">
+var disqus_shortname = 'bigzhu';
+var disqus_url = 'http://bigzhu.org'+location.pathname;
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+</body>
+</html>
