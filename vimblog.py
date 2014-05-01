@@ -28,7 +28,7 @@ def getHtmlContent(name):
 
 class list(tornado.web.RequestHandler):
     def get(self, name='*'):
-        lists = getList(name)
+        lists = getList(str(name))
         if name == '*':
             title = 'bigzhu的窝'
         else:
@@ -64,4 +64,4 @@ application = tornado.web.Application(url_map, **settings)
 if __name__ == "__main__":
     application.listen(8888)
     tornado.ioloop.IOLoop.instance().start()
-    #getList('bigzhu')
+    #getList('下')

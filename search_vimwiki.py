@@ -9,6 +9,12 @@ import os
 import time
 import re
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+
+
 WIKI_INDEX = 'wiki_index'
 
 
@@ -38,6 +44,7 @@ class SearchWiki:
                     wiki = wiki.rsplit('.', 1)
                     wiki = wiki[0]
                     self.wikis_time[wiki] = modify_time
+        print self.wiki_name
 
     def mergerByYear(self):
         '''按年份来归并'''
