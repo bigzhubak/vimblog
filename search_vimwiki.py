@@ -37,20 +37,16 @@ class SearchWiki:
 
     def search(self, path='.', html_path='.'):
         '''找到wiki文件名,并加上时间'''
-        #wiki_names = glob.glob('*%s*.wiki' % self.wiki_name)
         html_list = self.getHtmlNameList(html_path)
         pattern = re.compile(r'^\.')
         for wiki in os.listdir(path):
-            # 如果是路径，就不要加入
-            if os.path.isdir(wiki):
+            path_wiki = path + '/' + wiki
+            if os.path.isdir(path_wiki):
                 continue
             if(fnmatch.fnmatchcase(wiki.upper(), ('*%s*' % self.wiki_name).upper())):
-                if path != '.':  # 查找子路径,那么 wiki前面要加上路径
-                    wiki = path + '/' + wiki
-                modify_time = time.localtime(os.path.getmtime(wiki))
+                modify_time = time.localtime(os.path.getmtime(path_wiki))
                 m = pattern.search(wiki)
                 if m is None:  # 隐藏的文件不要参与查找
-                    wiki = os.path.basename(wiki)
                     wiki = wiki.rsplit('.', 1)
                     wiki = wiki[0]
                     if wiki in html_list:
