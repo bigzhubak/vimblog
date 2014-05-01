@@ -38,7 +38,6 @@ class SearchWiki:
                     wiki = wiki.rsplit('.', 1)
                     wiki = wiki[0]
                     self.wikis_time[wiki] = modify_time
-        print self.wikis_time
 
     def mergerByYear(self):
         '''按年份来归并'''
