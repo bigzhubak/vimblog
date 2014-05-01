@@ -29,7 +29,11 @@ def getHtmlContent(name):
 class list(tornado.web.RequestHandler):
     def get(self, name='*'):
         lists = getList(name)
-        self.render("./template/list.html", title=name, lists=lists)
+        if name == '*':
+            title = 'bigzhu的窝'
+        else:
+            title = name
+        self.render("./template/list.html", title=title, lists=lists)
 
 
 class blog(tornado.web.RequestHandler):
