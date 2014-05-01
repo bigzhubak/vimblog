@@ -35,14 +35,16 @@
 </nav>
 <div class="container">
     {%for l in lists%}
-    <div class="list-group">
-        <a href="#" class="list-group-item active">
-            {{l[0]}}年
-        </a>
-        {%for item in l[1]%}
-        <a href="/blog/{{item[0]}}" class="list-group-item">{{item[0]}}</a>
-        {%end%}
+    <div class="panel panel-default">
+        <div class="panel-heading">{{l[0]}}年</div>
+        <div class="list-group">
+            {%for item in l[1]%}
+            <a href="/blog/{{item[0]}}" class="list-group-item">{{item[0]}}</a>
+            {%end%}
+        </div>
     </div>
+
+
     {%end%}
     <!--评论-->
     <div id="disqus_thread"></div>
