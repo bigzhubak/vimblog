@@ -44,7 +44,7 @@
         </form>
     </div>
 </nav>
-<div class="container">
+<div style="padding:0 20px;">
     {%if content == '0'%}
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -61,10 +61,12 @@
     </div>
     {%else%}
     <div class="row">
-        <div class="col-xs-12 col-sm-9">
+        <div class="col-lg-2 col-xs-3 col-sm-3">
+        </div>
+        <div class="col-lg-8 col-xs-6 col-sm-9">
             {{content}}
         </div>
-        <div class="col-xs-6 col-sm-3">
+        <div class="col-lg-2 col-xs-3 col-sm-3">
             <div class="list-group">
                 {%for key_name in new_key_names%}
                 <a href="/blog/{{key_name[0]}}" class="list-group-item
