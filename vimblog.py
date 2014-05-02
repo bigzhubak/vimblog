@@ -10,6 +10,7 @@ HTML_PATH = '/home/bigzhu/Dropbox/knowledge/html/'
 WIKI_PATH = '/home/bigzhu/Dropbox/knowledge/data/'
 key_names = {}
 
+
 def getKeyNames():
     try:
         f = open('./key_name', 'r')
@@ -19,20 +20,23 @@ def getKeyNames():
     except IOError:
         pass
 
+
 def saveKeyNames():
     f = open('./key_name', 'w')
     global key_names
     print >>f, json.dumps(key_names)
     f.close()
 
+
 def addKeyNamesCount(name):
     global key_names
     if name in key_names:
         key_names[name] += 1
-        if key_names[name]%10 == 0:
+        if key_names[name] % 10 == 0:
             saveKeyNames()
     else:
         key_names[name] = 1
+
 
 def getList(name):
     seartch_wiki = SearchWiki(name)
@@ -44,10 +48,13 @@ def getList(name):
 
 
 def getHtmlContent(name):
-    name_file = open(HTML_PATH + name + '.html', 'r')
-    content = name_file.read()
-    name_file.close()
-    return content
+    try:
+        name_file = open(HTML_PATH + name + '.html', 'r')
+        content = name_file.read()
+        name_file.close()
+        return content
+    except IOError:
+        return '0'
 
 
 class list(tornado.web.RequestHandler):
@@ -79,9 +86,7 @@ class MyStaticFileHandler(tornado.web.StaticFileHandler):
         self.set_header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
 
 
-settings = {'debug': True, 'cookie_secret': 'bigzhu so big', 'autoescape': None,
-        "static_path": os.path.join(os.path.dirname(__file__), "static"),
-            }
+settings = {'debug': True, 'cookie_secret': 'bigzhu so big', 'autoescape': None, "static_path": os.path.join(os.path.dirname(__file__), "static"), }
 url_map = [
     (r'/', list),
     (r'/blog/(.*)', blog),

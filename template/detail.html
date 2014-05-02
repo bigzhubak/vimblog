@@ -45,7 +45,23 @@
     </div>
 </nav>
 <div class="container">
-    {{content}}
+    {%if content == '0'%}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            不好意思,没有找到和 <b>{{title}}</b> 有关的内容!<br>
+            所以,这个就应该是传说中的404界面了!<br>
+            <br>
+
+            这里界面真是你戳哪里戳出来的? 你怎么看到这个传说的?<br>
+            请给bigzhu发邮件告诉他: <br>vermiliondun@gmail.com<br>
+            或者用disqus留言!<br>
+            <br>
+            对了,别自己瞎改url啊!
+        </div>
+    </div>
+    {%else%}
+        {{content}}
+    {%end%}
     <!--评论-->
     <div id="disqus_thread"></div>
 
@@ -86,15 +102,15 @@ SyntaxHighlighter
 -->
 <script src="/static/syntaxhighlighter_3.0.83/scripts/shCore.js" type="text/javascript"></script>
 <script src="/static/syntaxhighlighter_3.0.83/scripts/shAutoloader.js" type="text/javascript"></script>
- 
+
 <script type="text/javascript">
 SyntaxHighlighter.autoloader(
-  'js jscript javascript    /static/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js',
-  'applescript              /static/syntaxhighlighter_3.0.83/scripts/shBrushAppleScript.js',
-  'bash                     /static/syntaxhighlighter_3.0.83/scripts/shBrushBash.js',
-  'python                   /static/syntaxhighlighter_3.0.83/scripts/shBrushPython.js'
-);
- 
+        'js jscript javascript    /static/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js',
+        'applescript              /static/syntaxhighlighter_3.0.83/scripts/shBrushAppleScript.js',
+        'bash                     /static/syntaxhighlighter_3.0.83/scripts/shBrushBash.js',
+        'python                   /static/syntaxhighlighter_3.0.83/scripts/shBrushPython.js'
+        );
+
 SyntaxHighlighter.all();
 </script>
 
