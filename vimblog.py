@@ -3,11 +3,36 @@
 import os
 import tornado.ioloop
 import tornado.web
+import json
 from search_vimwiki import SearchWiki
 
 HTML_PATH = '/home/bigzhu/Dropbox/knowledge/html/'
 WIKI_PATH = '/home/bigzhu/Dropbox/knowledge/data/'
-key_names = ['vim', 'python', 'bigzhu']
+key_names = {}
+
+def getKeyNames():
+    try:
+        f = open('./key_name', 'r')
+        global key_names
+        key_names = json.loads(f.read())
+        f.close()
+    except IOError:
+        pass
+
+def saveKeyNames():
+    f = open('./key_name', 'w')
+    global key_names
+    print >>f, json.dumps(key_names)
+    f.close()
+
+def addKeyNamesCount(name):
+    global key_names
+    if name in key_names:
+        key_names[name] += 1
+        if key_names[name]%10 == 0:
+            saveKeyNames()
+    else:
+        key_names[name] = 1
 
 def getList(name):
     seartch_wiki = SearchWiki(name)
@@ -32,6 +57,8 @@ class list(tornado.web.RequestHandler):
             title = 'bigzhu的窝'
         else:
             title = name
+            addKeyNamesCount(name)
+        global key_names
         self.render("./template/list.html", title=title, lists=lists, key_names=key_names)
 
 
@@ -40,6 +67,8 @@ class blog(tornado.web.RequestHandler):
         if name is None:
             name = 'index'
         content = getHtmlContent(name)
+
+        global key_names
         self.render("./template/detail.html", title=name, content=content, key_names=key_names)
 
 
@@ -61,6 +90,7 @@ url_map = [
 application = tornado.web.Application(url_map, **settings)
 
 if __name__ == "__main__":
+    getKeyNames()
     application.listen(80)
     tornado.ioloop.IOLoop.instance().start()
     #print getList('search_vimwiki')
