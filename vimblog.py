@@ -9,6 +9,7 @@ from search_vimwiki import SearchWiki
 HTML_PATH = '/home/bigzhu/Dropbox/knowledge/html/'
 WIKI_PATH = '/home/bigzhu/Dropbox/knowledge/data/'
 key_names = {}
+new_key_names = []
 
 
 def getKeyNames():
@@ -32,7 +33,7 @@ def addKeyNamesCount(name):
     global key_names
     if name in key_names:
         key_names[name] += 1
-        if key_names[name] % 10 == 0:
+        if key_names[name] % 5 == 0:
             saveKeyNames()
     else:
         key_names[name] = 1
@@ -44,6 +45,10 @@ def getList(name):
     seartch_wiki.mergerByYear()
     seartch_wiki.sortByTime()
     seartch_wiki.sortByYear()
+    global new_key_names
+    if seartch_wiki.mergered_all_sorted:
+        new_key_names = seartch_wiki.mergered_all_sorted[0][1][:10]
+        print new_key_names
     return seartch_wiki.mergered_all_sorted
 
 
@@ -76,7 +81,8 @@ class blog(tornado.web.RequestHandler):
         content = getHtmlContent(name)
 
         global key_names
-        self.render("./template/detail.html", title=name, content=content, key_names=key_names)
+        global new_key_names
+        self.render("./template/detail.html", title=name, content=content, key_names=key_names, new_key_names=new_key_names)
 
 
 class MyStaticFileHandler(tornado.web.StaticFileHandler):
