@@ -48,7 +48,6 @@ def getList(name):
     global new_key_names
     if seartch_wiki.mergered_all_sorted:
         new_key_names = seartch_wiki.mergered_all_sorted[0][1][:10]
-        print new_key_names
     return seartch_wiki.mergered_all_sorted
 
 
