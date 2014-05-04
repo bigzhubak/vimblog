@@ -28,10 +28,10 @@
         <ul class="nav navbar-nav">
             {%for key_name in key_names%}
             <li 
-            {%if key_name == title%}
+            {%if key_name[0] == title%}
             class="active"
             {%end%}
-            ><a href="/list/{{key_name}}">{{key_name}}</a></li>
+            ><a href="/list/{{key_name[0]}}">{{key_name[0]}}<span class="badge">{{key_name[1]}}</span></a></li>
             {%end%}
         </ul>
         <form class="navbar-form navbar-right" role="search">

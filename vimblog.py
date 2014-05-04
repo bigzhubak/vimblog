@@ -9,6 +9,7 @@ from search_vimwiki import SearchWiki
 HTML_PATH = '/home/bigzhu/Dropbox/knowledge/html/'
 WIKI_PATH = '/home/bigzhu/Dropbox/knowledge/data/'
 key_names = {}
+key_names_sorted = []
 new_key_names = []
 
 
@@ -16,7 +17,9 @@ def getKeyNames():
     try:
         f = open('./key_name', 'r')
         global key_names
+        global key_names_sorted
         key_names = json.loads(f.read())
+        key_names_sorted = sorted(key_names.items(), key=lambda by: by[1], reverse=True)
         f.close()
     except IOError:
         pass
@@ -36,7 +39,11 @@ def addKeyNamesCount(name):
         if key_names[name] % 5 == 0:
             saveKeyNames()
     else:
-        key_names[name] = 1
+        if name.strip() != "":
+            key_names[name] = 1
+        #需要排序
+    global key_names_sorted
+    key_names_sorted = sorted(key_names.items(), key=lambda by: by[1], reverse=True)
 
 
 def getList(name):
@@ -70,7 +77,8 @@ class list(tornado.web.RequestHandler):
             title = name
             addKeyNamesCount(name)
         global key_names
-        self.render("./template/list.html", title=title, lists=lists, key_names=key_names)
+        global key_names_sorted
+        self.render("./template/list.html", title=title, lists=lists, key_names=key_names_sorted)
 
 
 class blog(tornado.web.RequestHandler):
@@ -80,8 +88,9 @@ class blog(tornado.web.RequestHandler):
         content = getHtmlContent(name)
 
         global key_names
+        global key_names_sorted
         global new_key_names
-        self.render("./template/detail.html", title=name, content=content, key_names=key_names, new_key_names=new_key_names)
+        self.render("./template/detail.html", title=name, content=content, key_names=key_names_sorted, new_key_names=new_key_names)
 
 
 class MyStaticFileHandler(tornado.web.StaticFileHandler):
