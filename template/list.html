@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
 -->
 <link rel="stylesheet" href="{{ static_url('css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ static_url('vimblog.css') }}">
 
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -56,12 +57,13 @@
         </div>
     </div>
     {%end%}
+    {%import time%}
     {%for l in lists%}
     <div class="panel panel-default">
         <div class="panel-heading">{{l[0]}}年</div>
         <div class="list-group">
             {%for item in l[1]%}
-            <a href="/blog/{{item[0]}}" class="list-group-item">{{item[0]}}</a>
+            <a href="/blog/{{item[0]}}" class="list-group-item">{{item[0]}} <sub class="badge pull-right some-show">{{ time.strftime('%m月%d日%H:%M:%S', item[1])  }}</sub></a>
             {%end%}
         </div>
     </div>

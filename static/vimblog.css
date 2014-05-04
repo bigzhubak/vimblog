@@ -4,3 +4,11 @@
      left:20px;
      top:90px;
 }
+/*默认不显示*/
+.some-show {
+    display: none;
+}
+/*鼠标移上去显示*/
+.list-group a:hover .some-show {
+    display: block;
+}

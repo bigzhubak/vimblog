@@ -4,6 +4,7 @@ import os
 import tornado.ioloop
 import tornado.web
 import json
+import time
 from search_vimwiki import SearchWiki
 
 HTML_PATH = '/home/bigzhu/Dropbox/knowledge/html/'
