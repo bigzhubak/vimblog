@@ -35,12 +35,12 @@
             ><a href="/list/{{key_name[0]}}">{{key_name[0]}}<span class="badge">{{key_name[1]}}</span></a></li>
             {%end%}
         </ul>
-        <form class="navbar-form navbar-right" role="search">
+        <div class="navbar-form navbar-right" role="search">
             <div class="form-group">
                 <input id='key_name' type="text" onkeydown="if(event.keyCode==13) {search();return false;}" class="form-control" placeholder="Search">
             </div>
             <button type="button" onclick="search()" class="btn btn-default">查找</button>
-        </form>
+        </div>
     </div>
 </nav>
 <div class="container">
