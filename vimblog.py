@@ -86,6 +86,9 @@ class blog(tornado.web.RequestHandler):
     def get(self, name):
         if name is None:
             name = 'index'
+        html = name.rsplit('.', 1)
+        if len(html)>1 and html[1] == 'html':
+            name = html[0]
         content = getHtmlContent(name)
 
         global key_names

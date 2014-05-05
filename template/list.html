@@ -63,7 +63,7 @@
         <div class="panel-heading">{{l[0]}}年</div>
         <div class="list-group">
             {%for item in l[1]%}
-            <a href="/blog/{{item[0]}}" class="list-group-item">{{item[0]}} <sub class="badge pull-right some-show">{{ time.strftime('%m月%d日%H:%M:%S', item[1])  }}</sub></a>
+            <a href="/blog/{{item[0]}}" class="list-group-item">{{item[0]}} <sub class="badge some-show">{{ time.strftime('%m月%d日%H:%M:%S', item[1])  }}</sub></a>
             {%end%}
         </div>
     </div>
