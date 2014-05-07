@@ -109,6 +109,7 @@ url_map = [
     (r'/', list),
     (r'/blog/(.*)', blog),
     (r'/list/(.*)', list),
+    (r'/(.*)', blog),
 ]
 application = tornado.web.Application(url_map, **settings)
 
