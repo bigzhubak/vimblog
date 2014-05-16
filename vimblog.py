@@ -4,11 +4,11 @@ import os
 import tornado.ioloop
 import tornado.web
 import json
-import time
 from search_vimwiki import SearchWiki
 
 HTML_PATH = '/home/bigzhu/Dropbox/knowledge/html/'
 WIKI_PATH = '/home/bigzhu/Dropbox/knowledge/data/'
+SITE = 'site'
 key_names = {}
 key_names_sorted = []
 new_key_names = []
@@ -87,14 +87,15 @@ class blog(tornado.web.RequestHandler):
         if name is None:
             name = 'index'
         html = name.rsplit('.', 1)
-        if len(html)>1 and html[1] == 'html':
+        if len(html) > 1 and html[1] == 'html':
             name = html[0]
         content = getHtmlContent(name)
+        site = getHtmlContent(SITE)
 
         global key_names
         global key_names_sorted
         global new_key_names
-        self.render("./template/detail.html", title=name, content=content, key_names=key_names_sorted, new_key_names=new_key_names)
+        self.render("./template/detail.html", title=name, content=content, key_names=key_names_sorted, new_key_names=new_key_names, site=site)
 
 
 class MyStaticFileHandler(tornado.web.StaticFileHandler):
@@ -115,6 +116,6 @@ application = tornado.web.Application(url_map, **settings)
 
 if __name__ == "__main__":
     getKeyNames()
-    application.listen(80)
+    application.listen(8080)
     tornado.ioloop.IOLoop.instance().start()
     #print getList('search_vimwiki')
