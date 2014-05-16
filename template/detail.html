@@ -74,6 +74,7 @@
                 </div>
             </div>
             {%else%}
+            <h1>{{title}}</h1>
             {{content}}
             {%end%}
 
@@ -82,11 +83,13 @@
 
             <noscript>要查看或参与评论，请启用 JavaScript 支持 <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
             <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+            {%if site%}
             <div class="panel panel-default">
                 <div class="panel-body">
                     {{site}}
                 </div>
             </div>
+            {%end%}
             <p>&copy; 2009-2014 <a href="/blog/bigzhu">bigzhu</a>&nbsp;&nbsp;</p>
         </div>
         <div class="col-xs-6 col-md-4">
@@ -150,7 +153,7 @@ TOC
 <script type="text/javascript">
 $(function() {
         //Calls the tocify method on your HTML div.
-        var toc = $("#toc").tocify({ selectors: "h2,h3,h4,h5" }).data("toc-tocify"); 
+        var toc = $("#toc").tocify({ selectors: "h1,h2,h3,h4,h5" }).data("toc-tocify"); 
         });
 </script>
 <!-- google analytics -->

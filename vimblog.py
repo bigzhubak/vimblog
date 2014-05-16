@@ -90,6 +90,7 @@ class blog(tornado.web.RequestHandler):
         if len(html) > 1 and html[1] == 'html':
             name = html[0]
         content = getHtmlContent(name)
+        site = None
         site = getHtmlContent(SITE)
 
         global key_names
@@ -118,4 +119,3 @@ if __name__ == "__main__":
     getKeyNames()
     application.listen(8080)
     tornado.ioloop.IOLoop.instance().start()
-    #print getList('search_vimwiki')
