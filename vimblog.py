@@ -12,6 +12,7 @@ SITE = 'site'
 key_names = {}
 key_names_sorted = []
 new_key_names = []
+click_count = {}
 
 
 def getKeyNames():
@@ -26,25 +27,57 @@ def getKeyNames():
         pass
 
 
-def saveKeyNames():
-    f = open('./key_name', 'w')
-    global key_names
-    print >>f, json.dumps(key_names)
+def getClickCount():
+    try:
+        f = open('./click_count', 'r')
+        global click_count
+        click_count = json.loads(f.read())
+        f.close()
+    except IOError:
+        pass
+
+
+def save(file_name, content):
+    f = open('file_name', 'w')
+    print >>f, json.dumps(content)
     f.close()
+
+
+def saveKeyNames():
+    global key_names
+    save('key_name', key_names)
+
+
+def saveClickCount():
+    global click_count
+    save('click_count', click_count)
+
+
+def increase(dic, name):
+    if name in dic:
+        dic[name] += 1
+    else:
+        if name.strip() != "":
+            dic[name] = 1
+    return dic
 
 
 def addKeyNamesCount(name):
     global key_names
-    if name in key_names:
-        key_names[name] += 1
-        if key_names[name] % 5 == 0:
-            saveKeyNames()
-    else:
-        if name.strip() != "":
-            key_names[name] = 1
-        #需要排序
+    key_names = increase(key_names, name)
+    if key_names[name] % 5 == 0:
+        saveKeyNames()
+    #需要排序
     global key_names_sorted
     key_names_sorted = sorted(key_names.items(), key=lambda by: by[1], reverse=True)
+
+
+def addClickCount(name):
+    global click_count
+    click_count = increase(click_count, name)
+    if click_count[name] % 5 == 0:
+        saveClickCount()
+    return click_count[name]
 
 
 def getList(name):
@@ -79,7 +112,9 @@ class list(tornado.web.RequestHandler):
             addKeyNamesCount(name)
         global key_names
         global key_names_sorted
-        self.render("./template/list.html", title=title, lists=lists, key_names=key_names_sorted)
+        global click_count
+        print click_count
+        self.render("./template/list.html", title=title, lists=lists, key_names=key_names_sorted, click_count=click_count)
 
 
 class blog(tornado.web.RequestHandler):
@@ -96,7 +131,8 @@ class blog(tornado.web.RequestHandler):
         global key_names
         global key_names_sorted
         global new_key_names
-        self.render("./template/detail.html", title=name, content=content, key_names=key_names_sorted, new_key_names=new_key_names, site=site)
+        count = addClickCount(name)
+        self.render("./template/detail.html", title=name, content=content, key_names=key_names_sorted, new_key_names=new_key_names, site=site, count=count)
 
 
 class MyStaticFileHandler(tornado.web.StaticFileHandler):
@@ -117,5 +153,6 @@ application = tornado.web.Application(url_map, **settings)
 
 if __name__ == "__main__":
     getKeyNames()
+    getClickCount()
     application.listen(8080)
     tornado.ioloop.IOLoop.instance().start()

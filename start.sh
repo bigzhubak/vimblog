@@ -1,1 +1,1 @@
-nohup sudo ./vimblog.py  >> ~/vimblog.log &
+nohup ./vimblog.py  >> ~/vimblog.log &
