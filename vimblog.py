@@ -62,10 +62,11 @@ def increase(dic, name):
     return dic
 
 
-def addKeyNamesCount(name):
+def refreshKeyNamesCount(name, count):
     global key_names
-    key_names = increase(key_names, name)
-    if key_names[name] % 5 == 0:
+    #if key_names[name] % 5 == 0:
+    if count != 0:
+        key_names[name] = count
         saveKeyNames()
     #需要排序
     global key_names_sorted
@@ -102,6 +103,13 @@ def getHtmlContent(name):
         return '0'
 
 
+def getLen(lists):
+    count = 0
+    for l in lists:
+        count += len(l[1])
+    return count
+
+
 class list(tornado.web.RequestHandler):
     def get(self, name='*'):
         lists = getList(str(name))
@@ -109,11 +117,10 @@ class list(tornado.web.RequestHandler):
             title = 'bigzhu的窝'
         else:
             title = name
-            addKeyNamesCount(name)
+            refreshKeyNamesCount(name, getLen(lists))
         global key_names
         global key_names_sorted
         global click_count
-        print click_count
         self.render("./template/list.html", title=title, lists=lists, key_names=key_names_sorted, click_count=click_count)
 
 
