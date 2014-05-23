@@ -38,7 +38,7 @@ def getClickCount():
 
 
 def save(file_name, content):
-    f = open('file_name', 'w')
+    f = open(file_name, 'w')
     print >>f, json.dumps(content)
     f.close()
 

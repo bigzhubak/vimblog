@@ -76,10 +76,12 @@
                     {%for item in l[1]%}
                     <a href="/blog/{{item[0]}}" class="list-group-item">{{item[0]}} 
                     {%if item[0].decode('utf-8') in click_count%}
-                        <sub class="badge pull-left">{{ click_count[item[0].decode('utf-8')]}}</sub>
+                        <sub class="badge  on-show">{{ click_count[item[0].decode('utf-8')]}}</sub>
                     {%end%}
                         
-                    <sub class="badge some-show">{{ time.strftime('%m月%d日%H:%M:%S', item[1])  }}</sub></a>
+                    <sub class="badge pull-right some-show">{{ time.strftime('%m月%d日%H:%M:%S', item[1])  }}</sub>
+                
+                </a>
                     {%end%}
                 </div>
             </div>
