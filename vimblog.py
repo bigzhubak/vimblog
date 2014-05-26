@@ -35,7 +35,6 @@ def getClickCount():
         f = open(CLICK_COUNT, 'r')
         global click_count
         click_count = json.loads(f.read())
-        print click_count
         f.close()
     except IOError:
         print 'IOError'
