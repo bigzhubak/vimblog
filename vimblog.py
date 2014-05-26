@@ -8,6 +8,9 @@ from search_vimwiki import SearchWiki
 
 HTML_PATH = '/home/bigzhu/Dropbox/knowledge/html/'
 WIKI_PATH = '/home/bigzhu/Dropbox/knowledge/data/'
+CLICK_COUNT = '/home/bigzhu/click_count'
+click_path = './click/'
+
 SITE = 'site'
 key_names = {}
 key_names_sorted = []
@@ -29,11 +32,13 @@ def getKeyNames():
 
 def getClickCount():
     try:
-        f = open('./click_count', 'r')
+        f = open(CLICK_COUNT, 'r')
         global click_count
         click_count = json.loads(f.read())
+        print click_count
         f.close()
     except IOError:
+        print 'IOError'
         pass
 
 
@@ -50,7 +55,7 @@ def saveKeyNames():
 
 def saveClickCount():
     global click_count
-    save('click_count', click_count)
+    save(CLICK_COUNT, click_count)
 
 
 def increase(dic, name):
@@ -76,6 +81,7 @@ def refreshKeyNamesCount(name, count):
 def addClickCount(name):
     global click_count
     click_count = increase(click_count, name)
+    save(click_path + name, click_count[name])
     if click_count[name] % 5 == 0:
         saveClickCount()
     return click_count[name]
