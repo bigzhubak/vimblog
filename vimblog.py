@@ -16,6 +16,14 @@ key_names = {}
 key_names_sorted = []
 new_key_names = []
 click_count = {}
+black_keys = ['11', u'香港']
+
+
+def popSome():
+    global key_names
+    for black_key in black_keys:
+        if black_key in key_names:
+            key_names.pop(black_key)
 
 
 def getKeyNames():
@@ -24,6 +32,7 @@ def getKeyNames():
         global key_names
         global key_names_sorted
         key_names = json.loads(f.read())
+        popSome()
         key_names_sorted = sorted(key_names.items(), key=lambda by: by[1], reverse=True)
         f.close()
     except IOError:
