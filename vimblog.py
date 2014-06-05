@@ -102,8 +102,9 @@ def getList(name):
     seartch_wiki.sortByTime()
     seartch_wiki.sortByYear()
     global new_key_names
-    if seartch_wiki.mergered_all_sorted:
-        new_key_names = seartch_wiki.mergered_all_sorted[0][1][:10]
+    if name not in black_keys:
+        if seartch_wiki.mergered_all_sorted:
+            new_key_names = seartch_wiki.mergered_all_sorted[0][1][:10]
     return seartch_wiki.mergered_all_sorted
 
 
