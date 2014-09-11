@@ -6,9 +6,13 @@ import tornado.web
 import json
 from search_vimwiki import SearchWiki
 
-HTML_PATH = '/home/bigzhu/Dropbox/knowledge/html/'
-WIKI_PATH = '/home/bigzhu/Dropbox/knowledge/data/'
-CLICK_COUNT = '/home/bigzhu/click_count'
+from os.path import expanduser
+home = expanduser("~")
+print home
+
+HTML_PATH = home+'/Dropbox/knowledge/html/'
+WIKI_PATH = home+'/Dropbox/knowledge/data/'
+CLICK_COUNT = home+'/click_count'
 click_path = './click/'
 
 SITE = 'site'
@@ -174,7 +178,7 @@ url_map = [
 application = tornado.web.Application(url_map, **settings)
 
 if __name__ == "__main__":
-    getKeyNames()
-    getClickCount()
+    #getKeyNames()
+    #getClickCount()
     application.listen(8080)
     tornado.ioloop.IOLoop.instance().start()
