@@ -8,12 +8,12 @@ from search_vimwiki import SearchWiki
 
 from os.path import expanduser
 home = expanduser("~")
-print home
 
 HTML_PATH = home+'/Dropbox/knowledge/html/'
 WIKI_PATH = home+'/Dropbox/knowledge/data/'
 CLICK_COUNT = home+'/click_count'
-click_path = './click/'
+#click_path = './click/'
+click_path = home+'/click/'
 
 SITE = 'site'
 key_names = {}
@@ -113,6 +113,9 @@ def getList(name):
 
 
 def getHtmlContent(name):
+    '''
+    取得对应名字的 html 文件的内容
+    '''
     try:
         name_file = open(HTML_PATH + name + '.html', 'r')
         content = name_file.read()
@@ -144,6 +147,9 @@ class list(tornado.web.RequestHandler):
 
 
 class blog(tornado.web.RequestHandler):
+    '''
+    显示 blog 的详细内容
+    '''
     def get(self, name):
         if name is None:
             name = 'index'
@@ -151,21 +157,12 @@ class blog(tornado.web.RequestHandler):
         if len(html) > 1 and html[1] == 'html':
             name = html[0]
         content = getHtmlContent(name)
-        site = None
-        site = getHtmlContent(SITE)
-
         global key_names
         global key_names_sorted
         global new_key_names
         count = addClickCount(name)
-        self.render("./template/detail.html", title=name, content=content, key_names=key_names_sorted, new_key_names=new_key_names, site=site, count=count)
+        self.render("./template/detail.html", title=name, content=content, key_names=key_names_sorted, new_key_names=new_key_names, count=count)
 
-
-class MyStaticFileHandler(tornado.web.StaticFileHandler):
-    '''不要cache static 的文件'''
-    def set_extra_headers(self, path):
-        # Disable cache
-        self.set_header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
 
 
 settings = {'debug': True, 'cookie_secret': 'bigzhu so big', 'autoescape': None, "static_path": os.path.join(os.path.dirname(__file__), "static"), }
@@ -178,7 +175,7 @@ url_map = [
 application = tornado.web.Application(url_map, **settings)
 
 if __name__ == "__main__":
-    #getKeyNames()
-    #getClickCount()
+    getKeyNames()
+    getClickCount()
     application.listen(8080)
     tornado.ioloop.IOLoop.instance().start()

@@ -3,23 +3,11 @@
 <head>
 <title>{{title}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Bootstrap -->
-<!--
-<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
--->
 <link rel="stylesheet" href="{{ static_url('css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ static_url('syntaxhighlighter_3.0.83/styles/shCore.css') }}">
 <link rel="stylesheet" href="{{ static_url('syntaxhighlighter_3.0.83/styles/shThemeDefault.css') }}">
 <link rel="stylesheet" href="{{ static_url('vimblog.css') }}">
 <link rel="stylesheet" href="/static/jquery.tocify.js/src/stylesheets/jquery.tocify.css">
-
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
-        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation">
@@ -34,25 +22,17 @@
             <span class="icon-bar"></span>
         </button>
     </div>
+    <a class="navbar-brand" href="http://yemai.in" target="_bank">叶脉书签</a>
+    <a class="navbar-brand" href="/list/vim" >vim</a>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-            {%for key_name in key_names%}
-            <li 
-            {%if key_name[0] == title%}
-            class="active"
-            {%end%}
-            ><a href="/list/{{key_name[0]}}">{{key_name[0]}}<span class="badge">{{key_name[1]}}</span></a></li>
-            {%end%}
-        </ul>
         <form class="navbar-form navbar-right" role="search">
             <div class="form-group">
                 <input id='key_name' type="text" onkeydown="if(event.keyCode==13) {search();return false;}" class="form-control" placeholder="Search">
             </div>
             <button type="button" onclick="search()" class="btn btn-default">查找</button>
         </form>
-    </div><!-- /.navbar-collapse -->
+    </div>
 </nav>
 
 <div id="toc2"></div>
@@ -74,7 +54,8 @@
                 </div>
             </div>
             {%else%}
-                <h1>{{title}}<sub class="badge">{{count}}</sub></h1>
+            <h1>{{title}}</h1>
+            <sub class="badge">{{count}}</sub>
             {{content}}
             {%end%}
 
@@ -83,13 +64,6 @@
 
             <noscript>要查看或参与评论，请启用 JavaScript 支持 <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
             <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-            {%if site%}
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    {{site}}
-                </div>
-            </div>
-            {%end%}
             <p>&copy; 2009-2014 <a href="/blog/bigzhu">bigzhu</a>&nbsp;&nbsp;</p>
         </div>
         <div class="col-xs-6 col-md-4">
@@ -97,14 +71,6 @@
         </div>
     </div>
 </div>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<!--
-<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
--->
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<!--
-<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
--->
 <script type="text/javascript">
 function search(){
     var key_name=document.getElementById("key_name").value;  
@@ -163,7 +129,7 @@ $(function() {
  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'UA-27971316-1', 'bigzhu.org');
+ga('create', 'UA-27971316-1', 'auto');
 ga('send', 'pageview');
 
 </script>
