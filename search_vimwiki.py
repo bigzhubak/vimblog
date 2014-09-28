@@ -13,7 +13,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-
+NOT_IN = ['search']
 
 WIKI_INDEX = 'wiki_index'
 
@@ -49,6 +49,8 @@ class SearchWiki:
                 if m is None:  # 隐藏的文件不要参与查找
                     wiki = wiki.rsplit('.', 1)
                     wiki = wiki[0]
+                    if wiki in NOT_IN:
+                        continue
                     if wiki in html_list:
                         self.wikis_time[wiki] = modify_time
 
