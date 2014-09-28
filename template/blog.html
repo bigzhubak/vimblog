@@ -1,48 +1,38 @@
 {% extends 'base.html' %}
 
 {% block  content %}
-<div id="toc2"></div>
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-md-8">
-            {%if content == '0'%}
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    不好意思,没有找到和 <b>{{title}}</b> 有关的内容!<br>
-                    所以,这个就应该是传说中的404界面了!<br>
-                    <br>
+{%if content == '0'%}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        不好意思,没有找到和 <b>{{title}}</b> 有关的内容!<br>
+        所以,这个就应该是传说中的404界面了!<br>
+        <br>
 
-                    这里界面真是你戳哪里戳出来的? 你怎么看到这个传说的?<br>
-                    请给bigzhu发邮件告诉他: <br>vermiliondun@gmail.com<br>
-                    或者用disqus留言!<br>
-                    <br>
-                    对了,别自己瞎改url啊!
-                </div>
-            </div>
-            {%else%}
-            <h1>{{title}}</h1>
-            <sub class="badge">{{count}}</sub>
-            {{content}}
-            {%endif%}
-
-            <!--评论-->
-            <div id="disqus_thread"></div>
-
-            <noscript>要查看或参与评论，请启用 JavaScript 支持 <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-            <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-            <p>&copy; 2009-2014 <a href="/">bigzhu</a>&nbsp;&nbsp;</p>
-        </div>
-        <div class="col-xs-6 col-md-4">
-            <div id="toc"></div>
-        </div>
+        这里界面真是你戳哪里戳出来的? 你怎么看到这个传说的?<br>
+        请给bigzhu发邮件告诉他: <br>vermiliondun@gmail.com<br>
+        或者用disqus留言!<br>
+        <br>
+        对了,别自己瞎改url啊!
     </div>
 </div>
+{%else%}
+<h1>{{title}}</h1>
+<sub class="badge">{{count}}</sub>
+{{content}}
+{%endif%}
+
+<!--评论-->
+<div id="disqus_thread"></div>
+
+<noscript>要查看或参与评论，请启用 JavaScript 支持 <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+<p>&copy; 2009-2014 <a href="/">bigzhu</a>&nbsp;&nbsp;</p>
 {% endblock %}
 
 {% block  script %}
 <script type="text/javascript">
 var disqus_shortname = 'bigzhu';
-var disqus_url = 'http://bigzhu.org'+location.pathname;
+var disqus_url = 'http://blog.bigzhu.org'+location.pathname;
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function() {
  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

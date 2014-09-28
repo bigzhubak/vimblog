@@ -172,6 +172,32 @@ class list(tornado.web.RequestHandler):
             time=time)
         self.write(html)
 
+def getTenContent(name):
+    ten_names = getList(name)[0][1][0:9]
+    lists = []
+    for i in ten_names:
+        c = public_bz.storage()
+        c.name = i[0]
+        c.time = i[1]
+        c.content = getHtmlContent(c.name)
+        lists.append(c)
+    return lists
+
+class main(tornado.web.RequestHandler):
+
+    '''
+    显示 blog 列表
+    '''
+
+    def get(self, name='*'):
+        title = 'bigzhu的窝'
+        lists = getTenContent(name)
+
+        t = jinja2_bz.getTemplate(self.__class__.__name__)
+        print lists
+        html = t.render(title=title, lists=lists, time=time)
+        self.write(html)
+
 
 class blog(tornado.web.RequestHandler):
 
@@ -202,7 +228,8 @@ class blog(tornado.web.RequestHandler):
 
 
 url_map = [
-    (r'/', list),
+    (r'/', main),
+    (r'/list', list),
     (r'/blog/(.*)', blog),
     (r'/list/(.*)', list),
     (r'/(.*)', blog),

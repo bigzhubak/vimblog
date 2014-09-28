@@ -1,3 +1,28 @@
 {% extends 'base.html' %}
 {% block  content %}
+{%for list in lists%}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a href='/blog/{{list.name}}'>
+            <h3 class='title'>
+                {{list.name}}
+            </h3>
+        </a>
+        {{ time.strftime('%m月%d日%H:%M:%S', list.time)  }}
+
+        {{list.content}}
+    </div>
+</div>
+{%endfor%}
+<a href='/list'>全部...</sub>
+
+{% endblock %}
+
+{% block  script %}
+<script type="text/javascript">
+$(function() {
+        //Calls the tocify method on your HTML div.
+        var toc = $("#toc").tocify({ selectors: ".title" }).data("toc-tocify"); 
+        });
+</script>
 {% endblock %}
