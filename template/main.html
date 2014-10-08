@@ -4,17 +4,17 @@
 <div class="panel panel-default">
     <div class="panel-body">
         <a href='/blog/{{list.name}}'>
-            <h3 class='title'>
+            <h3 class='title_bz'>
                 {{list.name}}
             </h3>
         </a>
         {{ time.strftime('%m月%d日%H:%M:%S', list.time)  }}
+        <hr/>
 
         {{list.content}}
     </div>
 </div>
 {%endfor%}
-<a href='/list'>全部...</sub>
 
 {% endblock %}
 
@@ -22,7 +22,7 @@
 <script type="text/javascript">
 $(function() {
         //Calls the tocify method on your HTML div.
-        var toc = $("#toc").tocify({ selectors: ".title" }).data("toc-tocify"); 
+        var toc = $("#toc").tocify({ selectors: ".title_bz" }).data("toc-tocify"); 
         });
 </script>
 {% endblock %}

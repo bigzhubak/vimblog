@@ -25,6 +25,7 @@ key_names_sorted = []
 new_key_names = []
 click_count = {}
 black_keys = ['11', u'香港']
+SHOW_COUNT = 20 # 首页显示几个详情
 
 
 def popSome():
@@ -121,7 +122,7 @@ def getList(name):
     global new_key_names
     if name not in black_keys:
         if seartch_wiki.mergered_all_sorted:
-            new_key_names = seartch_wiki.mergered_all_sorted[0][1][:10]
+            new_key_names = seartch_wiki.mergered_all_sorted[0][1][:SHOW_COUNT]
     return seartch_wiki.mergered_all_sorted
 
 
@@ -172,6 +173,7 @@ class list(tornado.web.RequestHandler):
             time=time)
         self.write(html)
 
+
 def getTenContent(name):
     ten_names = getList(name)[0][1][0:9]
     lists = []
@@ -182,6 +184,7 @@ def getTenContent(name):
         c.content = getHtmlContent(c.name)
         lists.append(c)
     return lists
+
 
 class main(tornado.web.RequestHandler):
 
@@ -194,7 +197,6 @@ class main(tornado.web.RequestHandler):
         lists = getTenContent(name)
 
         t = jinja2_bz.getTemplate(self.__class__.__name__)
-        print lists
         html = t.render(title=title, lists=lists, time=time)
         self.write(html)
 
@@ -227,9 +229,34 @@ class blog(tornado.web.RequestHandler):
         self.write(html)
 
 
+class rss(tornado.web.RequestHandler):
+
+    '''
+    显示 rss
+    '''
+
+    def get(self, name='*'):
+        title = 'bigzhu的窝'
+        lists = getTenContent(name)
+
+        t = jinja2_bz.getTemplate(self.__class__.__name__, 'xml')
+        html = t.render(title=title, lists=lists, time=time)
+        self.write(html)
+
+class roottxt(tornado.web.RequestHandler):
+
+    '''
+    阿里妈妈验证
+    '''
+
+    def get(self):
+        self.write('756973118a848cc29e3952eee7f79daa')
+
 url_map = [
+    (r'/root.txt', roottxt),
     (r'/', main),
     (r'/list', list),
+    (r'/rss', rss),
     (r'/blog/(.*)', blog),
     (r'/list/(.*)', list),
     (r'/(.*)', blog),

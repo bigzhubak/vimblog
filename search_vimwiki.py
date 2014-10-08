@@ -13,7 +13,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-NOT_IN = ['search']
+NOT_IN = ['search', 'site']
 
 WIKI_INDEX = 'wiki_index'
 

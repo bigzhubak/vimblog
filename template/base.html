@@ -3,9 +3,12 @@
 <head>
 <title>{{title}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="rnbkcpnMGn_OuCRk2OvABExts6P-_YtP9Rkhf_0voGk" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://blog.bigzhu.org/rss" />
 <link rel="stylesheet" href="/static/css/bootstrap.min.css">
 <link rel="stylesheet" href="/static/vimblog.css">
 <link rel="stylesheet" href="/static/jquery.tocify.js/src/stylesheets/jquery.tocify.css">
+
 {% block link %}
 {% endblock %}
 </head>
@@ -23,8 +26,10 @@
         </button>
     </div>
 
-    <a class="navbar-brand" href="/list/vim" target="_bank">vim</a>
-    <a class="navbar-brand" href="/list/python" target="_bank">python</a>
+    <a class="navbar-brand" href="/list">全部</a>
+    <a class="navbar-brand" href="/list/vim">vim</a>
+    <a class="navbar-brand" href="/list/python">python</a>
+    <a class="navbar-brand" href="http://me.bigzhu.org">关于bigzhu</a>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <form class="navbar-form navbar-right" role="search">
@@ -47,7 +52,7 @@
             </div>
         </div>
     </div>
-    <p>&copy; 2009-2014 <a href="http://bigzhu.org">bigzhu</a>&nbsp;&nbsp;</p>
+    <p>&copy; 2009-2014 <a href="http://me.bigzhu.org">bigzhu</a>&nbsp;&nbsp;</p>
 </div>
 <script type="text/javascript">
 function search(){
@@ -68,9 +73,20 @@ function search(){
  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
 ga('create', 'UA-27971316-1', 'auto');
+ga('require', 'displayfeatures');
 ga('send', 'pageview');
 </script>
-
+<script type="text/javascript">
+     document.write('<a style="display:none!important" id="tanx-a-mm_13263676_7720661_25950222"></a>');
+     tanx_s = document.createElement("script");
+     tanx_s.type = "text/javascript";
+     tanx_s.charset = "gbk";
+     tanx_s.id = "tanx-s-mm_13263676_7720661_25950222";
+     tanx_s.async = true;
+     tanx_s.src = "http://p.tanx.com/ex?i=mm_13263676_7720661_25950222";
+     tanx_h = document.getElementsByTagName("head")[0];
+     if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
+</script>
 {% block script %}
 {% endblock %}
 </body>

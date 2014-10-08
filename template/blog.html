@@ -16,7 +16,7 @@
     </div>
 </div>
 {%else%}
-<h1>{{title}}</h1>
+<h2>{{title}}</h2>
 <sub class="badge">{{count}}</sub>
 {{content}}
 {%endif%}
@@ -26,7 +26,6 @@
 
 <noscript>要查看或参与评论，请启用 JavaScript 支持 <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-<p>&copy; 2009-2014 <a href="/">bigzhu</a>&nbsp;&nbsp;</p>
 {% endblock %}
 
 {% block  script %}
@@ -46,7 +45,7 @@ TOC
 <script type="text/javascript">
 $(function() {
         //Calls the tocify method on your HTML div.
-        var toc = $("#toc").tocify({ selectors: "h1,h2,h3,h4,h5" }).data("toc-tocify"); 
+        var toc = $("#toc").tocify({ selectors: "h2,h3,h4,h5" }).data("toc-tocify"); 
         });
 </script>
 <!--
