@@ -16,7 +16,7 @@
     </div>
 </div>
 {%else%}
-<h2>{{title}}</h2>
+<h1>{{title}}</h1>
 <sub class="badge">{{count}}</sub>
 {{content}}
 {%endif%}
@@ -45,26 +45,7 @@ TOC
 <script type="text/javascript">
 $(function() {
         //Calls the tocify method on your HTML div.
-        var toc = $("#toc").tocify({ selectors: "h2,h3,h4,h5" }).data("toc-tocify"); 
+        var toc = $("#toc").tocify({ selectors: "h1,h2,h3,h4,h5" }).data("toc-tocify"); 
         });
-</script>
-<!--
-SyntaxHighlighter
--->
-<script src="/static/syntaxhighlighter_3.0.83/scripts/shCore.js" type="text/javascript"></script>
-<script src="/static/syntaxhighlighter_3.0.83/scripts/shAutoloader.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-SyntaxHighlighter.autoloader(
-        'js jscript javascript    /static/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js',
-        'coffee                   /static/coffeescript-brush-for-syntaxhighlighter/shBrushCoffeeScript.js',
-        'applescript              /static/syntaxhighlighter_3.0.83/scripts/shBrushAppleScript.js',
-        'bash                     /static/syntaxhighlighter_3.0.83/scripts/shBrushBash.js',
-        'xml html                 /static/syntaxhighlighter_3.0.83/scripts/shBrushXml.js',
-        'sql                      /static/syntaxhighlighter_3.0.83/scripts/shBrushSql.js',
-        'java                     /static/syntaxhighlighter_3.0.83/scripts/shBrushJava.js',
-        'python                   /static/syntaxhighlighter_3.0.83/scripts/shBrushPython.js'
-        );
-SyntaxHighlighter.all();
 </script>
 {% endblock %}

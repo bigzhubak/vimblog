@@ -25,7 +25,7 @@ key_names_sorted = []
 new_key_names = []
 click_count = {}
 black_keys = ['11', u'香港']
-SHOW_COUNT = 20 # 首页显示几个详情
+SHOW_COUNT = 15 # 首页显示几个详情
 
 
 def popSome():
@@ -175,7 +175,7 @@ class list(tornado.web.RequestHandler):
 
 
 def getTenContent(name):
-    ten_names = getList(name)[0][1][0:9]
+    ten_names = getList(name)[0][1][:SHOW_COUNT]
     lists = []
     for i in ten_names:
         c = public_bz.storage()
@@ -262,7 +262,8 @@ url_map = [
     (r'/(.*)', blog),
 ]
 
-application = tornado_bz.getApplication(url_map)
+settings = tornado_bz.getSettings()
+application = tornado.web.Application(url_map, **settings)
 
 if __name__ == "__main__":
     getKeyNames()

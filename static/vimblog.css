@@ -1,9 +1,10 @@
-.toc
+/*.toc
 {
      position:fixed;
      left:20px;
      top:90px;
 }
+*/
 /*默认不显示*/
 .some-show {
     display: none;
@@ -20,4 +21,16 @@
 /*鼠标移上去显示*/
 .list-group:hover .on-show {
     display: block;
+}
+h1 {
+    font-size:160%
+}
+h2 {
+    font-size:140%
+}
+h3 {
+    font-size:130%
+}
+h3 {
+    font-size:120%
 }
