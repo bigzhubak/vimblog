@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <author>bigzhu</author>
+    <title>bigzhu的窝</title>
+    {%for list in lists %}
+    <entry>
+        <title>{{list.name}}</title>
+        <link href="http://blog.bigzhu.org/blog/{{list.name}}"/>
+        <content type="html">
+        {{list.content}}
+        </content>
+    </entry>
+    {%end%}
+</feed>
