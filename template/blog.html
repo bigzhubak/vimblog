@@ -19,14 +19,14 @@
 <h1>{{title}}</h1>
 <sub class="badge">{{count}}</sub>
 {{content}}
-{%endif%}
+{%end%}
 
 <!--评论-->
 <div id="disqus_thread"></div>
 
 <noscript>要查看或参与评论，请启用 JavaScript 支持 <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-{% endblock %}
+{% end %}
 
 {% block  script %}
 <script type="text/javascript">
@@ -48,4 +48,4 @@ $(function() {
         var toc = $("#toc").tocify({ selectors: "h1,h2,h3,h4,h5" }).data("toc-tocify"); 
         });
 </script>
-{% endblock %}
+{% end %}

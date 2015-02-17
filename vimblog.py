@@ -25,7 +25,7 @@ key_names_sorted = []
 new_key_names = []
 click_count = {}
 black_keys = ['11', u'香港']
-SHOW_COUNT = 15 # 首页显示几个详情
+SHOW_COUNT = 15  # 首页显示几个详情
 
 
 def popSome():
@@ -164,14 +164,13 @@ class list(tornado.web.RequestHandler):
         global key_names_sorted
         global click_count
 
-        t = jinja2_bz.getTemplate(self.__class__.__name__)
-        html = t.render(
-            title=title,
-            lists=lists,
-            key_names=key_names_sorted,
-            click_count=click_count,
-            time=time)
-        self.write(html)
+        self.render(tornado_bz.getTName(self),
+                title=title,
+                lists=lists,
+                key_names=key_names_sorted,
+                click_count=click_count,
+                time=time
+                )
 
 
 def getTenContent(name):
@@ -196,9 +195,7 @@ class main(tornado.web.RequestHandler):
         title = 'bigzhu的窝'
         lists = getTenContent(name)
 
-        t = jinja2_bz.getTemplate(self.__class__.__name__)
-        html = t.render(title=title, lists=lists, time=time)
-        self.write(html)
+        self.render(tornado_bz.getTName(self), title=title, lists=lists, time=time)
 
 
 class blog(tornado.web.RequestHandler):
@@ -219,15 +216,13 @@ class blog(tornado.web.RequestHandler):
         global new_key_names
         count = addClickCount(name)
 
-        t = jinja2_bz.getTemplate(self.__class__.__name__)
-        html = t.render(
-            title=name,
-            content=content,
-            key_names=key_names_sorted,
-            new_key_names=new_key_names,
-            count=count)
-        self.write(html)
-
+        self.render(tornado_bz.getTName(self),
+                title=name,
+                content=content,
+                key_names=key_names_sorted,
+                new_key_names=new_key_names,
+                count=count
+                )
 
 class rss(tornado.web.RequestHandler):
 
@@ -242,6 +237,7 @@ class rss(tornado.web.RequestHandler):
         t = jinja2_bz.getTemplate(self.__class__.__name__, 'xml')
         html = t.render(title=title, lists=lists, time=time)
         self.write(html)
+
 
 class roottxt(tornado.web.RequestHandler):
 
