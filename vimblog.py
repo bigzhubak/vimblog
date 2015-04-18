@@ -8,9 +8,11 @@ from search_vimwiki import SearchWiki
 
 from os.path import expanduser
 import tornado_bz
+import sys
 import public_bz
 
 import jinja2_bz
+
 
 home = expanduser("~")
 
@@ -165,12 +167,12 @@ class list(tornado.web.RequestHandler):
         global click_count
 
         self.render(tornado_bz.getTName(self),
-                title=title,
-                lists=lists,
-                key_names=key_names_sorted,
-                click_count=click_count,
-                time=time
-                )
+                    title=title,
+                    lists=lists,
+                    key_names=key_names_sorted,
+                    click_count=click_count,
+                    time=time
+                    )
 
 
 def getTenContent(name):
@@ -217,12 +219,13 @@ class blog(tornado.web.RequestHandler):
         count = addClickCount(name)
 
         self.render(tornado_bz.getTName(self),
-                title=name,
-                content=content,
-                key_names=key_names_sorted,
-                new_key_names=new_key_names,
-                count=count
-                )
+                    title=name,
+                    content=content,
+                    key_names=key_names_sorted,
+                    new_key_names=new_key_names,
+                    count=count
+                    )
+
 
 class rss(tornado.web.RequestHandler):
 
@@ -247,7 +250,7 @@ class roottxt(tornado.web.RequestHandler):
 
     def get(self):
         self.write('756973118a848cc29e3952eee7f79daa')
-
+'''
 url_map = [
     (r'/root.txt', roottxt),
     (r'/', main),
@@ -259,10 +262,28 @@ url_map = [
 ]
 
 settings = tornado_bz.getSettings()
+settings['debug'] = False
 application = tornado.web.Application(url_map, **settings)
+'''
 
 if __name__ == "__main__":
     getKeyNames()
     getClickCount()
-    application.listen(8080)
-    tornado.ioloop.IOLoop.instance().start()
+    if len(sys.argv) == 2:
+        port = int(sys.argv[1])
+    else:
+        port = 8888
+    print port
+
+    url_map = tornado_bz.getURLMap(globals().copy())
+    url_map.append((r'/', main))
+    url_map.append((r'/static/(.*)', tornado.web.StaticFileHandler, {'path': "./static"}))
+
+    settings = tornado_bz.getSettings()
+
+    application = tornado.web.Application(url_map, **settings)
+
+    application.listen(port)
+    ioloop = tornado.ioloop.IOLoop().instance()
+    tornado.autoreload.start(ioloop)
+    ioloop.start()
