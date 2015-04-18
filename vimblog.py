@@ -199,13 +199,15 @@ class main(tornado.web.RequestHandler):
 
         self.render(tornado_bz.getTName(self), title=title, lists=lists, time=time)
 
+
 class about(tornado.web.RequestHandler):
 
     '''
     '''
 
     def get(self):
-        self.render(tornado_bz.getTName(self,'bigzhu'))
+        self.render(tornado_bz.getTName(self, 'bigzhu'))
+
 
 class blog(tornado.web.RequestHandler):
 
