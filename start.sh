@@ -1,1 +1,1 @@
-nohup ./vimblog.py  >> ~/vimblog.log &
+nohup ./vimblog.py 8080 >> ~/vimblog.log &
