@@ -1,28 +1,18 @@
 {% extends 'base.html' %}
-{% block  content %}
+{% block  body %}
 {%for list in lists%}
-<div class="panel panel-default">
-    <div class="panel-body">
-        <a href='/blog/{{list.name}}'>
-            <h1 class='title_bz'>
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h1 class="box-title">
+            <a href='/blog/{{list.name}}'>
                 {{list.name}}
-            </h1>
-        </a>
-        {{ time.strftime('%m月%d日%H:%M:%S', list.time)  }}
-        <hr/>
-
-        {{list.content}}
+            </a>
+        </h1>
+        <br>{{ time.strftime('%m月%d日%H:%M:%S', list.time)  }}
     </div>
+    <div class="box-body">
+        {{list.content}}
+    </div><!-- /.box-body -->
 </div>
 {%end%}
-
-{% end %}
-
-{% block  script %}
-<script type="text/javascript">
-$(function() {
-        //Calls the tocify method on your HTML div.
-        var toc = $("#toc").tocify({ selectors: ".title_bz" }).data("toc-tocify"); 
-        });
-</script>
 {% end %}

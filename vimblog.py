@@ -10,6 +10,7 @@ from os.path import expanduser
 import tornado_bz
 import sys
 import public_bz
+from tornado_bz import BaseHandler
 
 import jinja2_bz
 
@@ -149,7 +150,7 @@ def getLen(lists):
     return count
 
 
-class list(tornado.web.RequestHandler):
+class list(BaseHandler):
 
     '''
     显示 blog 列表
@@ -187,7 +188,7 @@ def getTenContent(name):
     return lists
 
 
-class main(tornado.web.RequestHandler):
+class main(BaseHandler):
 
     '''
     显示 blog 列表
@@ -200,7 +201,7 @@ class main(tornado.web.RequestHandler):
         self.render(tornado_bz.getTName(self), title=title, lists=lists, time=time)
 
 
-class about(tornado.web.RequestHandler):
+class about(BaseHandler):
 
     '''
     '''
@@ -209,7 +210,7 @@ class about(tornado.web.RequestHandler):
         self.render(tornado_bz.getTName(self, 'bigzhu'))
 
 
-class blog(tornado.web.RequestHandler):
+class blog(BaseHandler):
 
     '''
     显示 blog 的详细内容
@@ -236,7 +237,7 @@ class blog(tornado.web.RequestHandler):
                     )
 
 
-class rss(tornado.web.RequestHandler):
+class rss(BaseHandler):
 
     '''
     显示 rss
@@ -251,7 +252,7 @@ class rss(tornado.web.RequestHandler):
         self.write(html)
 
 
-class roottxt(tornado.web.RequestHandler):
+class roottxt(BaseHandler):
 
     '''
     阿里妈妈验证
@@ -276,19 +277,26 @@ application = tornado.web.Application(url_map, **settings)
 '''
 
 if __name__ == "__main__":
+    pg = None
+    the_class = tornado_bz.getAllUIModuleRequestHandlers()
+    the_class.update(globals().copy())
+
     getKeyNames()
     getClickCount()
+
     if len(sys.argv) == 2:
         port = int(sys.argv[1])
     else:
         port = 8888
     print port
 
-    url_map = tornado_bz.getURLMap(globals().copy())
+    url_map = tornado_bz.getURLMap(the_class)
     url_map.append((r'/', main))
     url_map.append((r'/static/(.*)', tornado.web.StaticFileHandler, {'path': "./static"}))
 
     settings = tornado_bz.getSettings()
+
+    settings["pg"] = pg
 
     application = tornado.web.Application(url_map, **settings)
 
