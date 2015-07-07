@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
 {% block  body %}
+
 {%for list in lists%}
-<div class="box box-primary">
-    <div class="box-header with-border">
-        <h1 class="box-title">
-            <a href='/blog/{{list.name}}'>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a href='/blog/{{list.name}}'>
+            <h2 class='title_bz'>
                 {{list.name}}
-            </a>
-        </h1>
-        <br>{{ time.strftime('%m月%d日%H:%M:%S', list.time)  }}
-    </div>
-    <div class="box-body">
+            </h2>
+        </a>
+        {{ time.strftime('%m月%d日%H:%M:%S', list.time)  }}
+        <hr/>
+
         {{list.content}}
-    </div><!-- /.box-body -->
+    </div>
 </div>
+
 {%end%}
+
 {% end %}
