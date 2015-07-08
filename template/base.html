@@ -18,13 +18,14 @@
             {% block css %}
             {% end %}
 
+            <script src="/static/base.js"></script>
     </head>
     <body class="skin-black layout-top-nav">
         {% from public_bz import storage%}
         {% set links = [] %}
         {% set links.append(storage(href='/list', name='全部')) %}
         {% set links.append(storage(href='/list/vim', name='vim')) %}
-        {% set links.append(storage(href='/list/python', name='添加/分享')) %}
+        {% set links.append(storage(href='/list/python', name='python')) %}
         {% set links.append(storage(href='http://me.bigzhu.org', name='关于bigzhu')) %}
         {% module header_m(None, 'BigZhu的窝', links, need_login=False) %}
         <br>
