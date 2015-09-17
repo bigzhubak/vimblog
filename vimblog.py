@@ -12,7 +12,7 @@ import sys
 import public_bz
 from tornado_bz import BaseHandler
 
-import jinja2_bz
+#import jinja2_bz
 
 
 home = expanduser("~")
@@ -237,19 +237,19 @@ class blog(BaseHandler):
                     )
 
 
-class rss(BaseHandler):
-
-    '''
-    显示 rss
-    '''
-
-    def get(self, name='*'):
-        title = 'bigzhu的窝'
-        lists = getTenContent(name)
-
-        t = jinja2_bz.getTemplate(self.__class__.__name__, 'xml')
-        html = t.render(title=title, lists=lists, time=time)
-        self.write(html)
+#class rss(BaseHandler):
+#
+#    '''
+#    显示 rss
+#    '''
+#
+#    def get(self, name='*'):
+#        title = 'bigzhu的窝'
+#        lists = getTenContent(name)
+#
+#        t = jinja2_bz.getTemplate(self.__class__.__name__, 'xml')
+#        html = t.render(title=title, lists=lists, time=time)
+#        self.write(html)
 
 
 class roottxt(BaseHandler):

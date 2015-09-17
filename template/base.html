@@ -12,13 +12,17 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
             <![endif]-->
-            <link rel="stylesheet" href="/static/vimblog.css">
+            <link href="/lib_static/lib/bootstrap-3.3.2-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+            <link href="/lib_static/lib/Font-Awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+
+            <link href="/lib_static/lib/AdminLTE-2.0.4/dist/css/AdminLTE.css" type="text/css" rel="stylesheet"/>
+
             <link href="/lib_static/lib/AdminLTE-2.0.4/dist/css/skins/skin-black.min.css" rel="stylesheet" type="text/css" />
             <link href="/static/base.css" rel="stylesheet" type="text/css" />
+            <link rel="stylesheet" href="/static/vimblog.css">
             {% block css %}
             {% end %}
 
-            <script src="/static/base.js"></script>
     </head>
     <body class="skin-black layout-top-nav">
         {% from public_bz import storage%}
@@ -27,6 +31,7 @@
         {% set links.append(storage(href='/list/vim', name='vim')) %}
         {% set links.append(storage(href='/list/python', name='python')) %}
         {% set links.append(storage(href='http://me.bigzhu.org', name='关于bigzhu')) %}
+        {% set links.append(storage(href='http://yncoder.github.io/', name='云南程序员', target='_blank')) %}
         {% module header_m(None, 'BigZhu的窝', links, need_login=False) %}
         <br>
         <div class="container">
@@ -39,10 +44,13 @@
             {%import time_bz %}
             <p>&copy; 2009-{{time_bz.getYearMonth(fmt='%Y')}} <a href="http://me.bigzhu.org">bigzhu</a>&nbsp;&nbsp;</p>
         </div>
+        <script src="/lib_static/lib/vue.js"></script>
+        <script src="/lib_static/lib/jquery-2.1.1.min.js"></script>
+        <script src="/lib_static/lib/underscore-min.js?v=3"></script>
+        <script src="/static/base.js"></script>
+
+
         {% block js %}
         {% end %}
     </body>
 </html>
-
-{% module base_m() %}
-{% module public_m() %}
