@@ -278,8 +278,7 @@ application = tornado.web.Application(url_map, **settings)
 
 if __name__ == "__main__":
     pg = None
-    the_class = tornado_bz.getAllUIModuleRequestHandlers()
-    the_class.update(globals().copy())
+    the_class = globals().copy()
 
     getKeyNames()
     getClickCount()
