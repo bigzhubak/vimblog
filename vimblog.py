@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import sys
+sys.path.append('./lib_p_bz')
 import tornado.ioloop
 import tornado.web
 import json
@@ -11,9 +13,6 @@ import tornado_bz
 import sys
 import public_bz
 from tornado_bz import BaseHandler
-
-#import jinja2_bz
-
 
 home = expanduser("~")
 
@@ -226,18 +225,17 @@ class blog(BaseHandler):
         global key_names
         global key_names_sorted
         global new_key_names
-        count = addClickCount(name)
+        # count = addClickCount(name)
 
         self.render(tornado_bz.getTName(self),
                     title=name,
                     content=content,
                     key_names=key_names_sorted,
-                    new_key_names=new_key_names,
-                    count=count
+                    new_key_names=new_key_names
                     )
 
 
-#class rss(BaseHandler):
+# class rss(BaseHandler):
 #
 #    '''
 #    显示 rss
@@ -281,7 +279,7 @@ if __name__ == "__main__":
     the_class = globals().copy()
 
     getKeyNames()
-    getClickCount()
+    # getClickCount()
 
     if len(sys.argv) == 2:
         port = int(sys.argv[1])
