@@ -2,20 +2,15 @@
 {% block  body %}
 
 {%for list in lists%}
-<div class="panel panel-default">
-    <div class="panel-body">
-        <a href='/blog/{{list.name}}'>
-            <h2 class='title_bz'>
-                {{list.name}}
-            </h2>
-        </a>
-        {{ time.strftime('%m月%d日%H:%M:%S', list.time)  }}
-        <hr/>
+<h1 class="ui header">
+  <a href='/blog/{{list.name}}'>{{list.name}}</a>
+  <div class="sub header">{{ time.strftime('%m月%d日%H:%M:%S', list.time)  }}</div>
+</h1>
+<p>
+{{list.content}}
+</p>
 
-        {{list.content}}
-    </div>
-</div>
-
+<div class="ui divider"></div>
 {%end%}
 
 {% end %}
