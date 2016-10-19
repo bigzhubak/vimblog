@@ -7,7 +7,7 @@
     <meta name="description" content="{% block description %}{% end %}" />
     <meta name="keywords" content="{% block keywords %}{% end %}" />
     <link rel='shortcut icon' href='/static/images/login-logo.png' />
-    <link href="/static/semantic.min.css" rel="stylesheet">
+    <link href="/static/Semantic-UI-CSS-master/semantic.min.css" rel="stylesheet">
     <link href="//cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
     <link href="/static/syntaxhighlighter_3.0.83/styles/shCore.css" rel="stylesheet">
     <link href="/static/syntaxhighlighter_3.0.83/styles/shCoreDefault.css" rel="stylesheet">
@@ -17,15 +17,23 @@
   <body>
     <header id="v_header" class="main-header">               
     <div class="ui menu">
-      <div class="header item">
+      <a href="/" class="header item">
         BigZhu的窝
+      </a>
+      <a href="/list" class="item">全部</a>
+      <a href="/list/vim" class="item">vim</a>
+      <a href="/list/python" class="item">python</a>
+      <a href="/list/vue" class="item">vue</a>
+      <div class="right menu ">
+        <div class="item large monitor only">
+          <form @keyup.enter="search" @submit.prevent="search" class="ui  transparent icon input">
+            <input v-model="key" type="text" placeholder="搜索">
+            <i @click="search" class="search link icon"></i>
+          </form>
+        </div>
+        <a href="./list/vim" class="item">关于Bigzhu</a>
       </div>
-      <a href="./list" class="item">全部</a>
-      <a href="./list/vim" class="item">vim</a>
-      <a class="item">Upcoming Events</a>
     </div>
-    <vnav :navbar_header="navbar_header" :nav_links="nav_links">
-    </vnav>
     </header>
     <br>
     <div class="ui container">
