@@ -27,7 +27,6 @@ key_names_sorted = []
 new_key_names = []
 click_count = {}
 black_keys = ['11', u'香港']
-SHOW_COUNT = 15  # 首页显示几个详情
 
 
 def popSome():
@@ -124,7 +123,8 @@ def getList(name):
     global new_key_names
     if name not in black_keys:
         if seartch_wiki.mergered_all_sorted:
-            new_key_names = seartch_wiki.mergered_all_sorted[0][1][:SHOW_COUNT]
+            # new_key_names = seartch_wiki.mergered_all_sorted[0][1][:SHOW_COUNT]
+            new_key_names = seartch_wiki.mergered_all_sorted[0][1]
     return seartch_wiki.mergered_all_sorted
 
 
@@ -175,14 +175,19 @@ class list(BaseHandler):
                     )
 
 
-def getTenContent(name):
-    ten_names = getList(name)[0][1][:SHOW_COUNT]
+def getContent(name, count=15, lenght=None):
+    ten_names = getList(name)[0][1][:count]
     lists = []
     for i in ten_names:
         c = public_bz.storage()
         c.name = i[0]
         c.time = i[1]
         c.content = getHtmlContent(c.name)
+        if lenght:
+            print len(c.content)
+            if len(c.content) < lenght:
+                print 'continue ' + c.name
+                continue
         lists.append(c)
     return lists
 
@@ -195,7 +200,7 @@ class main(BaseHandler):
 
     def get(self, name='*'):
         title = 'bigzhu的窝'
-        lists = getTenContent(name)
+        lists = getContent(name, 100, 500)
 
         self.render(tornado_bz.getTName(self), title=title, lists=lists, time=time)
 

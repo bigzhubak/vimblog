@@ -7,7 +7,7 @@
     <meta name="description" content="{% block description %}{% end %}" />
     <meta name="keywords" content="{% block keywords %}{% end %}" />
     <link rel='shortcut icon' href='/static/images/login-logo.png' />
-    <link href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
+    <link href="/static/semantic.min.css" rel="stylesheet">
     <link href="//cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
     <link href="/static/syntaxhighlighter_3.0.83/styles/shCore.css" rel="stylesheet">
     <link href="/static/syntaxhighlighter_3.0.83/styles/shCoreDefault.css" rel="stylesheet">
@@ -27,7 +27,6 @@
     <vnav :navbar_header="navbar_header" :nav_links="nav_links">
     </vnav>
     </header>
-
     <br>
     <div class="ui container">
       {% block body %}
