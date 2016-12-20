@@ -28,7 +28,21 @@
 
     <!-- Main -->
     <div id="main">
+      {%for list in lists%}
+      <section id="one">
+      <header class="major">
+      <h2 class="ui header">
+        <a href='/blog/{{list.name}}'>{{list.name}}</a>
+      </h2>
+      <p>{{ time.strftime('%m月%d日%H:%M:%S', list.time)  }}</p>
+      </header>
+      <p>
+      {{list.content}}
+      </p>
+      </section>
+      {%end%}
       <!-- One -->
+      <section id="one">
       <header class="major">
       <h2>Ipsum lorem dolor aliquam ante commodo<br />
         magna sed accumsan arcu neque.</h2>
