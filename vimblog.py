@@ -202,7 +202,7 @@ class main(BaseHandler):
         title = 'bigzhu的窝'
         lists = getContent(name, 50, 500)
 
-        self.render(tornado_bz.getTName(self), title=title, lists=lists, time=time)
+        self.render(tornado_bz.getTName(self, 'index'), title=title, lists=lists, time=time)
 
 
 class about(BaseHandler):
