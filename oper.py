@@ -56,7 +56,6 @@ def getHtmlListByNameLike(search_name):
         html_name = cutName(html)
         if html_name == '':
             continue
-        print html_name
         if isNameLike(html_name, search_name):
             pass
         else:
@@ -64,7 +63,7 @@ def getHtmlListByNameLike(search_name):
 
         try:
             modify_time = getModifyTime(html_name)
-        except OSError as e:
+        except OSError as e:  # 可能会有非html结尾的文件，忽略
             print e
             continue
 
@@ -72,6 +71,9 @@ def getHtmlListByNameLike(search_name):
         the_html.name = html_name
         the_html.time = modify_time
         html_list.append(the_html)
+
+    # 按时间排序
+    html_list = sorted(html_list, key=lambda d: d.time)
     return html_list
 
 
@@ -88,6 +90,18 @@ def getHtmlContent(name):
         print public_bz.getExpInfoAll()
         return '0'
 
+
+def getMainList():
+    '''
+    取出前10个blog的内容
+    '''
+    html_list = getHtmlListByNameLike('bigzhu')
+    html_list = html_list[:9]
+    for html in html_list:
+        html.content = getHtmlContent(html.name)
+    return html_list
+
+
 if __name__ == '__main__':
-    for i in getHtmlListByNameLike('*'):
+    for i in getMainList():
         print i
