@@ -164,23 +164,11 @@ class list(BaseHandler):
     '''
 
     def get(self, name='*'):
-        lists = getList(str(name))
-        if name == '*':
-            title = 'bigzhu的窝'
-        else:
-            title = name
-            refreshKeyNamesCount(name, getLen(lists))
-        global key_names
-        global key_names_sorted
-        global click_count
-
-        self.render(tornado_bz.getTName(self),
-                    title=title,
-                    lists=lists,
-                    key_names=key_names_sorted,
-                    click_count=click_count,
-                    time=time
-                    )
+        html_list = oper.getHtmlListByNameLike(name)
+        for html in html_list:
+            # html.content = oper.getHtmlContent(html.name)
+            html.content = ''
+        self.render(tornado_bz.getTName(self, 'index'), title=TITLE, main_list=html_list, time=time)
 
 
 def getContent(name, count=15, lenght=None):

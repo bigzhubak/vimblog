@@ -18,6 +18,9 @@
     <a href="/" class="image avatar"><img src="/static/images/avatar2.jpg" alt="" /></a>
     <h1><strong>bigzhu</strong></h1>
     <br><a href="http://lorstone.com" target="blank">昆明络石软件设计</a>
+    <br><a href="/list/python">python</a>
+    <br><a href="/list/vim">vim</a>
+    <br><a href="/list/vue">vue</a>
     </header>
 
     <!-- Main -->
@@ -28,7 +31,7 @@
       <h2 class="ui header">
         <a href='/blog/{{l.name}}'>{{l.name}}</a>
       </h2>
-      <p>{{ time.strftime('%m月%d日%H:%M:%S', l.time)  }}</p>
+      <p>{{ time.strftime('%y年%m月%d日%H:%M:%S', l.time)  }}</p>
       </header>
       <p>
       {{l.content}}
