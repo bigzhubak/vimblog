@@ -27,16 +27,16 @@
 
     <!-- Main -->
     <div id="main">
-      {%for list in lists%}
+      {%for l in main_list%}
       <section id="one">
       <header class="major">
       <h2 class="ui header">
-        <a href='/blog/{{list.name}}'>{{list.name}}</a>
+        <a href='/blog/{{l.name}}'>{{l.name}}</a>
       </h2>
-      <p>{{ time.strftime('%m月%d日%H:%M:%S', list.time)  }}</p>
+      <p>{{ time.strftime('%m月%d日%H:%M:%S', l.time)  }}</p>
       </header>
       <p>
-      {{list.content}}
+      {{l.content}}
       </p>
       </section>
       {%end%}

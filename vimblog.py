@@ -13,6 +13,7 @@ import tornado_bz
 import sys
 import public_bz
 from tornado_bz import BaseHandler
+import oper
 
 home = expanduser("~")
 
@@ -200,9 +201,9 @@ class main(BaseHandler):
 
     def get(self, name='*'):
         title = 'bigzhu的窝'
-        lists = getContent(name, 50, 500)
+        main_list = oper.getMainList()
 
-        self.render(tornado_bz.getTName(self, 'index'), title=title, lists=lists, time=time)
+        self.render(tornado_bz.getTName(self, 'index'), title=title, main_list=main_list, time=time)
 
 
 class about(BaseHandler):

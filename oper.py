@@ -73,7 +73,7 @@ def getHtmlListByNameLike(search_name):
         html_list.append(the_html)
 
     # 按时间排序
-    html_list = sorted(html_list, key=lambda d: d.time)
+    html_list = sorted(html_list, key=lambda d: d.time, reverse=True)
     return html_list
 
 
@@ -95,7 +95,7 @@ def getMainList():
     '''
     取出前10个blog的内容
     '''
-    html_list = getHtmlListByNameLike('bigzhu')
+    html_list = getHtmlListByNameLike('*')
     html_list = html_list[:9]
     for html in html_list:
         html.content = getHtmlContent(html.name)
