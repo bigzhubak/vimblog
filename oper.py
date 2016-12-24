@@ -9,12 +9,15 @@ import fnmatch
 import time
 from public_bz import storage
 
+from os.path import expanduser
+home = expanduser("~")
+
 import ConfigParser
 config = ConfigParser.ConfigParser()
 with open('conf.ini', 'r') as cfg_file:
     config.readfp(cfg_file)
     TITLE = config.get('data', 'title')
-    HTML_PATH = config.get('data', 'html_path')
+    HTML_PATH = home + config.get('data', 'html_path')
 
 
 def getModifyTime(name):
