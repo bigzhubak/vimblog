@@ -29,6 +29,13 @@ new_key_names = []
 click_count = {}
 black_keys = ['11', u'香港']
 
+import ConfigParser
+config = ConfigParser.ConfigParser()
+with open('conf.ini', 'r') as cfg_file:
+    config.readfp(cfg_file)
+    TITLE = config.get('data', 'title')
+    HTML_PATH = config.get('data', 'html_path')
+
 
 def popSome():
     global key_names
@@ -200,10 +207,9 @@ class main(BaseHandler):
     '''
 
     def get(self, name='*'):
-        title = 'bigzhu的窝'
         main_list = oper.getMainList()
 
-        self.render(tornado_bz.getTName(self, 'index'), title=title, main_list=main_list, time=time)
+        self.render(tornado_bz.getTName(self, 'index'), title=TITLE, main_list=main_list, time=time)
 
 
 class about(BaseHandler):
@@ -222,23 +228,10 @@ class blog(BaseHandler):
     '''
 
     def get(self, name):
-        if name is None:
-            name = 'index'
-        html = name.rsplit('.', 1)
-        if len(html) > 1 and html[1] == 'html':
-            name = html[0]
-        content = getHtmlContent(name)
-        global key_names
-        global key_names_sorted
-        global new_key_names
-        # count = addClickCount(name)
+        html = oper.getHtmlByName(name)
+        main_list = [html]
 
-        self.render(tornado_bz.getTName(self),
-                    title=name,
-                    content=content,
-                    key_names=key_names_sorted,
-                    new_key_names=new_key_names
-                    )
+        self.render(tornado_bz.getTName(self, 'index'), title=name, main_list=main_list, time=time)
 
 
 # class rss(BaseHandler):

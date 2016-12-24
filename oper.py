@@ -91,6 +91,14 @@ def getHtmlContent(name):
         return '0'
 
 
+def getHtmlByName(name):
+    the_html = storage()
+    the_html.name = name
+    the_html.time = getModifyTime(name)
+    the_html.content = getHtmlContent(name)
+    return the_html
+
+
 def getMainList():
     '''
     取出前10个blog的内容
