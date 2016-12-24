@@ -195,7 +195,7 @@ def getContent(name, count=15, lenght=None):
 class main(BaseHandler):
 
     '''
-    显示 blog 列表
+    blog 首页
     '''
 
     def get(self, name='*'):
