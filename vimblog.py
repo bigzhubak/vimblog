@@ -216,6 +216,8 @@ class blog(BaseHandler):
     '''
 
     def get(self, name):
+        # 如果有html后缀，剔除
+        name = oper.removeHtmlSuffix(name)
         html = oper.getHtmlByName(name)
         main_list = [html]
 

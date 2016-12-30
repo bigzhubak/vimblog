@@ -48,6 +48,16 @@ def cutName(html):
     return html_name
 
 
+def removeHtmlSuffix(name):
+    '''
+    删了html后缀
+    '''
+    name_list = name.rsplit('.', 1)
+    if len(name_list) > 1 and name_list[1] == 'html':
+        return name_list[0]
+    return name
+
+
 def getHtmlListByNameLike(search_name):
     '''
     根据名字查找对应html
